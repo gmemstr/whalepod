@@ -1,0 +1,14 @@
+name: whalepod-example
+versions:
+  - 1.0
+  - 1.1
+  - 1.2
+  - 2.0
+  - 3.0
+parameters:
+  hello_to: "developer"
+template: |
+  FROM alpine:3.7
+  LABEL version="<<version>>"
+
+  RUN echo Hello <<params.hello_to>>!
