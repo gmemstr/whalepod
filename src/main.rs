@@ -9,8 +9,10 @@ use std::collections::HashMap;
 #[derive(StructOpt)]
 struct Cli {
     /// The path to configuration file.
-    #[structopt(parse(from_os_str))]
+    #[structopt(default_value="whalepod.yml",parse(from_os_str))]
     path: std::path::PathBuf,
+    #[structopt(default_value = ".", long, short)]
+    output: String
 }
 
 #[derive(Deserialize)]
@@ -29,8 +31,15 @@ fn main() -> Result<(), serde_yaml::Error> {
     let version_reg = Regex::new("<{2}(version)>{2}").unwrap();
     let param_regex = Regex::new("<{2}(params.)(?P<param_name>.*?)>{2}").unwrap();
 
+    let build_dir = &args.output;
+    if !std::path::Path::new(build_dir).exists() {
+        fs::create_dir(&args.output).expect("Unable to create specified directory.");
+    }
+
     for version in d.versions {
-        fs::create_dir(&version).ok();
+        let dockerfile_path = format!("{}/{}/Dockerfile", build_dir, &version);
+
+        fs::create_dir(format!("{}/{}", build_dir, &version)).ok();
         let tmpl_with_version = version_reg.replace_all(&d.template, NoExpand(&version));
         let parameters = &d.parameters;
         let tmpl = param_regex.replace_all(&tmpl_with_version, |cap: &Captures| {
@@ -38,7 +47,7 @@ fn main() -> Result<(), serde_yaml::Error> {
             return param;
         });
 
-        let _file = fs::write(format!("{}/Dockerfile", &version), tmpl.as_bytes()).expect("unable to open");
+        let _file = fs::write(dockerfile_path, tmpl.as_bytes()).expect("unable to open");
     }
     Ok(())
 }
