@@ -45,6 +45,24 @@ can be specified by passing through the `--output <directory>` (`-o=<directory>`
 
 > TODO: add `docker push` command to Makefile
 
+```
+whalepod 0.1.0
+Quickly generate Dockerfiles from YAML
+
+USAGE:
+    whalepod [OPTIONS] [path]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -o, --output <output>     [default: .]
+
+ARGS:
+    <path>    The path to configuration file [default: whalepod.yml]
+```
+
 Disclaimer
 ---
 

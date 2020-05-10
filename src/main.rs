@@ -5,14 +5,16 @@ use std::{fs,vec};
 use regex::{Regex,NoExpand,Captures};
 use std::collections::HashMap;
 
-/// Search for a pattern in a file and display the lines that contain it.
+/// Quickly generate Dockerfiles from YAML.
 #[derive(StructOpt)]
 struct Cli {
     /// The path to configuration file.
     #[structopt(default_value="whalepod.yml",parse(from_os_str))]
     path: std::path::PathBuf,
+
+    // Directory to save Dockerfiles and Makefile to.
     #[structopt(default_value = ".", long, short)]
-    output: String
+    output: String,
 }
 
 #[derive(Deserialize)]
