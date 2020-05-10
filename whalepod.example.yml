@@ -6,7 +6,7 @@ versions:
   - 2.0
   - 3.0
 parameters:
-  hello_to: "developer"
+  hello_to: "Docker"
 template: |
   FROM alpine:3.7
   LABEL version="<<version>>"
