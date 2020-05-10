@@ -1,10 +1,14 @@
-Whalepod <small>Quickly generate Dockerfiles</small>
+Whalepod
 ===
+
+**Quickly generate Dockerfiles**
 
 Maintaining multiple Docker images for various version of an application - for example, Node.js -
 can become tricky past a certain point. Whalepod aims to make it easier to generate and maintain
 Dockerfiles using templates and YAML, and creating the neccesary tooling configuration to build
 and push them.
+
+[![asciicast](https://asciinema.org/a/328945.svg)](https://asciinema.org/a/328945)
 
 whalepod.yml
 ---
