@@ -10,6 +10,8 @@ and push them.
 
 [![asciicast](https://asciinema.org/a/328945.svg)](https://asciinema.org/a/328945)
 
+Proof of concept using Whalepod: https://github.com/gmemstr/flutter-fastlane-android
+
 whalepod.yml
 ---
 
